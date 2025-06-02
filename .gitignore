@@ -1,0 +1,118 @@
+# Environment variables (contains sensitive information)
+.env
+*.env
+
+# Virtual Environment - be very explicit to ensure it's ignored
+/llama-rag-env/
+/llama-rag-env/**
+/venv/
+/env/
+/.venv/
+/ENV/
+/virtualenv/
+/.virtualenv/
+/*env*/
+/*ENV*/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+
+# React/Node.js
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env*
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/coverage/
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Data and model files
+/data/chroma_db/
+/data/uploaded/
+/data/models/
+*.bin
+*.h5
+*.onnx
+
+# CUDA/PyTorch specific
+*.pth
+*.pt
+.torch/
+torch-tmp/
+
+# Model cache
+.cache/
+.huggingface/
+**/__pycache__/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# Log files
+*.log
+logs/
+*.out
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Large files that shouldn't be in git
+*.csv
+*.parquet
+*.pickle
+*.pkl
+*.gz
+*.zip
+*.tar
+*.7z
+*.rar
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.mp3
+*.mp4
+*.avi
+*.mov
