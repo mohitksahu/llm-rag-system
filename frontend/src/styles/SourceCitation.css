@@ -1,0 +1,58 @@
+.source-citation {
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 0.75rem;
+}
+
+.source-toggle {
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.source-toggle:hover {
+  text-decoration: underline;
+}
+
+.source-list {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.source-list h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.source-list ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.source-list li {
+  margin-bottom: 0.4rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.source-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #6c757d;
+}
+
+.source-type {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: #495057;
+}

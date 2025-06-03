@@ -1,0 +1,17 @@
+.header {
+  background-color: #343a40;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.header p {
+  margin: 0.5rem 0 0;
+  opacity: 0.8;
+  font-size: 1rem;
+}
