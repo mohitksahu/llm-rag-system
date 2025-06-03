@@ -4,10 +4,10 @@ import '../styles/Footer.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="container">
-        <p>
-          Built with Llama 2, React, and Python Flask 
-        </p>
+      <div className="footer-content">
+        <div className="footer-text">
+          Made with <span className="heart">❤️</span> by <span className="author">Mohit Kumar Sahu</span>
+        </div>
       </div>
     </footer>
   );
