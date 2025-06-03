@@ -1,11 +1,22 @@
 """Test the Hugging Face token."""
-from utils.env_utils import load_environment
 import os
+import sys
+from pathlib import Path
+from dotenv import load_dotenv
 from huggingface_hub import HfApi
 
 def test_token():
-    # Load environment variables
-    load_environment()
+    # Load environment variables from specific path
+    # Use raw string to avoid escape sequence issues with backslashes
+    env_path = Path(r"F:\llm-rag-model\llama-rag-system\.env")
+    
+    # Check if the file exists
+    if not env_path.exists():
+        print(f"❌ Error: .env file not found at {env_path}")
+        return False
+      # Load the .env file
+    print(f"Loading .env from: {env_path}")
+    load_dotenv(dotenv_path=env_path)
     
     # Get token
     token = os.getenv("HUGGINGFACE_TOKEN")
