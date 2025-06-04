@@ -60,13 +60,13 @@ cd llama-rag-system
 ```powershell
 cd backend
 python -m venv ../llama-rag-env
-../llama-rag-env/Scripts/activate
+./llama-rag-env-new/Scripts/activate
 pip install -r requirements.txt
 ```
 
 #### 2.1. Run the Backend
 ```powershell
-uvicorn app:app --reload --host 127.0.0.1 --port 8000
+python app.py
 ```
 
 ### 3. Set Up React Frontend
@@ -81,7 +81,7 @@ npm start
 ```
 
 - The frontend will be available at [http://localhost:3000](http://localhost:3000)
-- The backend API will be available at [http://localhost:8000](http://localhost:8000)
+- The backend API will be available at [http://localhost:5000](http://localhost:5000)
 
 ---
 
