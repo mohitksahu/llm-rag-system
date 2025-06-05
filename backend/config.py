@@ -35,19 +35,12 @@ def get_device_config():
             "use_quantization": True,
             "model_name": "meta-llama/Llama-2-7b-chat-hf"
         }
-    elif torch.cuda.is_available() and IN_COLAB:
-        # Colab GPU environment (may have quantization issues)
-        return {
-            "device": "cuda", 
-            "use_quantization": False,  # Disable quantization in Colab
-            "model_name": "microsoft/DialoGPT-medium"  # Smaller model for Colab
-        }
     else:
-        # CPU environment
+        # CPU environment or Colab (quantization enabled)
         return {
             "device": "cpu",
-            "use_quantization": False,
-            "model_name": "microsoft/DialoGPT-medium"  # Smaller model for CPU
+            "use_quantization": True,  # Enable quantization for CPU as well
+            "model_name": "meta-llama/Llama-2-7b-chat-hf"
         }
 
 # Get device configuration

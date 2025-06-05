@@ -68,28 +68,29 @@ class LLMService:
                 model_kwargs["token"] = token
 
             # Configure device mapping and quantization
-            if config.USE_GPU and torch.cuda.is_available():
-                model_kwargs["device_map"] = "auto"
-
-                # Add quantization if available and enabled
-                if config.USE_QUANTIZATION and QUANTIZATION_AVAILABLE:
-                    print("Configuring 4-bit quantization...")
-                    quantization_config = BitsAndBytesConfig(
-                        load_in_4bit=True,
-                        bnb_4bit_use_double_quant=True,
-                        bnb_4bit_quant_type="nf4",
-                        bnb_4bit_compute_dtype=torch.float16
-                    )
-                    model_kwargs["quantization_config"] = quantization_config
-
-                    # Memory optimization for RTX 3050 6GB
+            if config.USE_QUANTIZATION and QUANTIZATION_AVAILABLE:
+                print("Configuring 4-bit quantization...")
+                quantization_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_compute_dtype=torch.float16 if config.USE_GPU else torch.float32
+                )
+                model_kwargs["quantization_config"] = quantization_config
+                if config.USE_GPU and torch.cuda.is_available():
+                    model_kwargs["device_map"] = "auto"
                     if not config.IN_COLAB:
                         model_kwargs["max_memory"] = {0: "5GiB"}
                 else:
-                    print("Quantization disabled - loading model in full precision")
+                    model_kwargs["device_map"] = {"": "cpu"}
             else:
-                print("Loading model on CPU...")
-                model_kwargs["device_map"] = None
+                print("Quantization disabled or not available - loading model in full precision")
+                if config.USE_GPU and torch.cuda.is_available():
+                    model_kwargs["device_map"] = "auto"
+                    if not config.IN_COLAB:
+                        model_kwargs["max_memory"] = {0: "5GiB"}
+                else:
+                    model_kwargs["device_map"] = {"": "cpu"}
 
             # Load model
             print("Loading model (this may take a few minutes)...")
@@ -106,45 +107,7 @@ class LLMService:
 
         except Exception as e:
             print(f"✗ Error loading model: {e}")
-            print("Attempting fallback to smaller model...")
-            self._load_fallback_model(token)
-
-    def _load_fallback_model(self, token):
-        """Load a smaller fallback model if the main model fails"""
-        try:
-            fallback_model = "microsoft/DialoGPT-medium"
-            print(f"Loading fallback model: {fallback_model}")
-
-            # Load fallback tokenizer
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                fallback_model,
-                trust_remote_code=True
-            )
-            if self.tokenizer.pad_token is None:
-                self.tokenizer.pad_token = self.tokenizer.eos_token
-                self.tokenizer.pad_token_id = self.tokenizer.eos_token_id
-
-            # Load fallback model (always without quantization)
-            self.model = AutoModelForCausalLM.from_pretrained(
-                fallback_model,
-                torch_dtype=torch.float16 if config.USE_GPU else torch.float32,
-                device_map="auto" if config.USE_GPU and torch.cuda.is_available() else None,
-                trust_remote_code=True,
-                low_cpu_mem_usage=True
-            )
-
-            # Set device
-            if not config.USE_GPU or not torch.cuda.is_available():
-                self.device = "cpu"
-                self.model = self.model.to("cpu")
-            else:
-                self.device = "cuda"
-
-            print(f"✓ Fallback model loaded successfully on {self.device}!")
-
-        except Exception as e:
-            print(f"✗ Fallback model also failed: {e}")
-            raise RuntimeError("Failed to load any model. Please check your environment.")
+            raise RuntimeError("Failed to load the Llama model. Please check your environment and dependencies.")
 
     def generate_response(self, prompt, max_new_tokens=None):
         """Generate a response from the LLM given a prompt"""
