@@ -132,13 +132,11 @@ class LLMService:
             if hasattr(self, 'device'):
                 inputs = {k: v.to(self.device) for k, v in inputs.items()}
             elif config.USE_GPU and torch.cuda.is_available():
-                inputs = {k: v.to("cuda") for k, v in inputs.items()}
-
-            # Generate response
+                inputs = {k: v.to("cuda") for k, v in inputs.items()}            # Generate response
             with torch.no_grad():
                 outputs = self.model.generate(
-                    inputs.input_ids,
-                    attention_mask=inputs.attention_mask,
+                    inputs["input_ids"],
+                    attention_mask=inputs["attention_mask"],
                     max_new_tokens=max_new_tokens,
                     do_sample=True,
                     temperature=config.TEMPERATURE,

@@ -62,6 +62,16 @@ cd backend
 python -m venv ../llama-rag-env
 ./llama-rag-env-new/Scripts/activate
 pip install -r requirements.txt
+
+### 2. Set Up .env file
+env_dir = "path-to-your-dir"  # This is the directory
+env_file_path = f"{env_dir}/.env"    # Now we specify the full path including the filename
+
+token = "abc123"
+
+with open(env_file_path, "w") as f:
+    f.write(f"TOKEN={token}\n")
+
 ```
 
 #### 2.1. Run the Backend
