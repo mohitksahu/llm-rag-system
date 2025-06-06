@@ -1,14 +1,34 @@
+# Flask and Web Server
 flask==2.3.3
 flask-cors==4.0.0
-langchain==0.1.12
-chromadb==1.0.12
+Werkzeug==2.3.7  # Flask dependency
+
+# LLM and Machine Learning Libraries
 torch==2.2.1
 transformers==4.38.2
 accelerate==0.27.2
+bitsandbytes==0.46.0  # Updated version
 sentence-transformers==2.7.0
 huggingface_hub==0.20.3
-bitsandbytes==0.42.0
-protobuf==3.20.0
+
+# RAG and Document Processing
+langchain==0.1.12
+langchain-community>=0.0.16  # Often needed with recent langchain
+chromadb==1.0.12
 PyPDF2==3.0.1
 pytesseract==0.3.10
 Pillow==10.2.0
+
+# Utilities
+python-dotenv==1.0.0
+protobuf==3.20.0
+numpy>=1.23.5
+tqdm>=4.66.1
+pydantic>=2.0.0  # Often required by langchain and chromadb
+
+# Optional Dependencies for Hardware Acceleration
+# torch-npu - install separately if you have a Huawei NPU
+# intel_extension_for_pytorch - install separately if you have an Intel CPU and want CPU quantization
+
+# Note: To use the system, you need to create a .env file in the project root with:
+# HUGGINGFACE_TOKEN=your_token_here
