@@ -5,7 +5,7 @@ from routes.api import api_bp
 from utils.env_utils import load_environment
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all origins
 
 # Load environment variables (including Hugging Face token)
 load_environment()
