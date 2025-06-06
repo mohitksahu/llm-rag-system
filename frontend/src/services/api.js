@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-// Change this to the ngrok URL provided by your Google Colab notebook
-// For example: https://a1b2-35-123-234-12.ngrok.io
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-
-console.log('Connecting to backend at:', API_URL);
+const API_URL = 'http://localhost:5000';
 
 // Configure axios
 const api = axios.create({
