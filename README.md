@@ -52,7 +52,7 @@ llama-rag-system/
 
 ### 1. Clone the Repository
 ```powershell
-git clone <your-repo-url>
+git clone https://github.com/mohitksahu/llm-rag-system.git
 cd llama-rag-system
 ```
 
